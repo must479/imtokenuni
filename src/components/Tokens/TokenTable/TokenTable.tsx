@@ -7,6 +7,7 @@ import { ReactNode, useCallback, useRef } from 'react'
 import { AlertTriangle } from 'react-feather'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
+import { GlowByChain } from 'theme/utils'
 
 import { MAX_WIDTH_MEDIA_BREAKPOINT } from '../constants'
 import { HeaderRow, LoadedRow, LoadingRow } from './TokenRow'
@@ -26,6 +27,7 @@ const GridContainer = styled.div`
   justify-content: center;
   align-items: center;
   border: 1px solid ${({ theme }) => theme.backgroundOutline};
+  ${GlowByChain}
 `
 
 const TokenDataContainer = styled.div`

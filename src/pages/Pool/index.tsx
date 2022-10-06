@@ -135,6 +135,7 @@ const ResponsiveButtonPrimary = styled(ButtonPrimary)`
 
 const MainContentWrapper = styled.main`
   background-color: ${({ theme }) => theme.deprecated_bg0};
+  border: 1px solid ${({ theme }) => theme.backgroundOutline};
   padding: 8px;
   border-radius: 20px;
   display: flex;
