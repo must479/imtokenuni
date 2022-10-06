@@ -76,8 +76,8 @@ export function GlowByChain(): any {
       default:
         setShadow(
           darkMode
-            ? `box-shadow: 0px 40px 120px rgba(251, 17, 142, 0.30);`
-            : `box-shadow: 0px 40px 120px rgba(251, 17, 142, 0.30);`
+            ? `box-shadow: 0px 40px 120px rgba(251, 17, 142, 0.15);`
+            : `box-shadow: 0px 40px 120px rgba(251, 17, 142, 0.15);`
         )
         break
     }
