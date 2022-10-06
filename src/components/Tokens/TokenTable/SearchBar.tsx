@@ -21,7 +21,7 @@ const SearchInput = styled.input`
   background-image: url(${searchIcon});
   background-size: 20px 20px;
   background-position: 12px center;
-  background-color: ${({ theme }) => theme.backgroundModule};
+  background-color: ${({ theme }) => theme.backgroundSurface};
   border-radius: 12px;
   border: 1.5px solid ${({ theme }) => theme.backgroundOutline};
   height: 100%;

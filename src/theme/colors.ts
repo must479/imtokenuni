@@ -234,8 +234,8 @@ export const colorsLight: Palette = {
 
   backgroundBackdrop: colors.white,
   backgroundSurface: colors.white,
-  backgroundModule: colors.gray50,
-  backgroundInteractive: colors.gray100,
+  backgroundModule: opacify(50, colors.gray50),
+  backgroundInteractive: opacify(40, colors.gray100),
   backgroundFloating: opacify(8, colors.gray700),
   backgroundOutline: opacify(24, colors.gray500),
   backgroundScrim: opacify(60, colors.gray900),

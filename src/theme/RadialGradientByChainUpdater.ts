@@ -97,7 +97,7 @@ export default function RadialGradientByChainUpdater(): null {
       default:
         setBackground(initialStyles)
         const defaultLightGradient = redesignFlagEnabled
-          ? 'radial-gradient(100% 100% at 50% 0%, rgba(255, 184, 226, 0.51) 0%, rgba(255, 255, 255, 0) 100%), #FFFFFF'
+          ? 'radial-gradient(100% 100% at 50% 0%, rgba(255, 184, 226, 0.31) 0%, rgba(255, 255, 255, 0) 100%), #FFFFFF'
           : 'radial-gradient(50% 50% at 50% 50%,#fc077d10 0,rgba(255,255,255,0) 100%)'
         const defaultDarkGradient = redesignFlagEnabled
           ? 'linear-gradient(180deg, #202738 0%, #070816 100%)'

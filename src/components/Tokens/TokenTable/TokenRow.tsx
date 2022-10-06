@@ -50,14 +50,15 @@ const StyledTokenRow = styled.div<{
   background-color: transparent;
   display: grid;
   font-size: 16px;
+  font-weight: 500;
   grid-template-columns: ${({ favoriteTokensEnabled }) =>
-    favoriteTokensEnabled ? '1fr 7fr 4fr 4fr 4fr 4fr 5fr 1.2fr' : '1fr 7fr 4fr 4fr 4fr 4fr 5fr'};
+    favoriteTokensEnabled ? '1fr 7fr 4fr 4fr 4fr 4fr 4fr 1.2fr' : '1fr 7fr 4fr 4fr 4fr 4fr 4fr'};
   line-height: 24px;
   max-width: ${MAX_WIDTH_MEDIA_BREAKPOINT};
   min-width: 390px;
   ${({ first, last }) => css`
-    height: ${first || last ? '72px' : '64px'};
-    padding-top: ${first ? '8px' : '0px'};
+    // height: ${first || last ? 'px' : '64px'};
+    padding-top: ${first ? '4px' : '0px'};
     padding-bottom: ${last ? '8px' : '0px'};
   `}
   padding-left: 12px;
@@ -243,15 +244,15 @@ const HeaderCellWrapper = styled.span<{ onClick?: () => void }>`
 `
 const SparkLineCell = styled(Cell)`
   padding: 0px 24px;
-  min-width: 120px;
+  min-width: 96px;
 
   @media only screen and (max-width: ${MAX_WIDTH_MEDIA_BREAKPOINT}) {
     display: none;
   }
 `
 const SparkLine = styled(Cell)`
-  width: 124px;
-  height: 42px;
+  width: 96px;
+  height: 36px;
 `
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -311,6 +312,10 @@ const IconLoadingBubble = styled(LoadingBubble)`
 `
 const SparkLineLoadingBubble = styled(LongLoadingBubble)`
   height: 4px;
+`
+
+const StyledPercentChange = styled.div<{ delta?: any }>`
+  color: ${({ delta, theme }) => (Math.sign(delta) < 0 ? theme.accentFailure : theme.accentSuccess)};
 `
 
 export const L2NetworkLogo = styled.div<{ networkUrl?: string; size?: string }>`
@@ -537,8 +542,8 @@ export const LoadedRow = forwardRef((props: LoadedRowProps, ref: ForwardedRef<HT
           }
           percentChange={
             <ClickableContent>
-              {formattedDelta}
               {arrow}
+              <StyledPercentChange delta={delta}>{formattedDelta}</StyledPercentChange>
             </ClickableContent>
           }
           marketCap={

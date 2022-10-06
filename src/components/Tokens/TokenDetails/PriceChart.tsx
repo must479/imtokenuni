@@ -62,7 +62,7 @@ export function formatDelta(delta: number | null | undefined) {
   }
   let formattedDelta = delta.toFixed(2) + '%'
   if (Math.sign(delta) > 0) {
-    formattedDelta = '+' + formattedDelta
+    formattedDelta = '' + formattedDelta
   }
   return formattedDelta
 }
