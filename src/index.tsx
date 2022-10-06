@@ -4,6 +4,8 @@ import 'polyfills'
 import 'components/analytics'
 
 import { FeatureFlagsProvider } from 'featureFlags'
+import { BaseVariant } from 'featureFlags'
+import { useRedesignFlag } from 'featureFlags/flags/redesign'
 import RelayEnvironment from 'graphql/data/RelayEnvironment'
 import { BlockNumberProvider } from 'lib/hooks/useBlockNumber'
 import { MulticallUpdater } from 'lib/state/multicall'
@@ -35,9 +37,12 @@ if (!!window.ethereum) {
 }
 
 function Updaters() {
+  const redesignFlag = useRedesignFlag()
+  const redesignFlagEnabled = redesignFlag === BaseVariant.Enabled
+
   return (
     <>
-      <RadialGradientByChainUpdater />
+      {!redesignFlagEnabled && <RadialGradientByChainUpdater />}
       <ListsUpdater />
       <UserUpdater />
       <ApplicationUpdater />

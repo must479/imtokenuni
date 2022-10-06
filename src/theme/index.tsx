@@ -381,7 +381,7 @@ export const ThemedText = {
 export const ThemedGlobalStyle = createGlobalStyle`
 html {
   color: ${({ theme }) => theme.deprecated_text1};
-  background-color: ${({ theme }) => theme.deprecated_bg1} !important;
+  background-color: ${({ theme }) => theme.backgroundBackdrop} !important;
 }
 
 a {
