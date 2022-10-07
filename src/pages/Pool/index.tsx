@@ -19,6 +19,7 @@ import { useToggleWalletModal } from 'state/application/hooks'
 import { useUserHideClosedPositions } from 'state/user/hooks'
 import styled, { css, useTheme } from 'styled-components/macro'
 import { HideSmall, ThemedText } from 'theme'
+import { GlowByChain } from 'theme/utils'
 import { PositionDetails } from 'types/position'
 
 import { V2_FACTORY_ADDRESSES } from '../../constants/addresses'
@@ -136,10 +137,10 @@ const ResponsiveButtonPrimary = styled(ButtonPrimary)`
 const MainContentWrapper = styled.main`
   background-color: ${({ theme }) => theme.deprecated_bg0};
   border: 1px solid ${({ theme }) => theme.backgroundOutline};
-  padding: 8px;
-  border-radius: 20px;
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
+  ${GlowByChain}
 `
 
 function PositionsLoadingPlaceholder() {

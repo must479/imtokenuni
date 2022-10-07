@@ -23,7 +23,6 @@ import { DAI, USDC_MAINNET, USDT, WBTC, WRAPPED_NATIVE_CURRENCY } from '../../co
 
 const LinkRow = styled(Link)`
   align-items: center;
-  border-radius: 20px;
   display: flex;
   cursor: pointer;
   user-select: none;
@@ -32,20 +31,19 @@ const LinkRow = styled(Link)`
 
   justify-content: space-between;
   color: ${({ theme }) => theme.deprecated_text1};
-  margin: 8px 0;
+  margin: 0 0;
   padding: 16px;
   text-decoration: none;
   font-weight: 500;
-  background-color: ${({ theme }) => theme.deprecated_bg1};
 
   &:last-of-type {
-    margin: 8px 0 0 0;
+    margin: 0 0 0 0;
   }
   & > div:not(:first-child) {
     text-align: center;
   }
   :hover {
-    background-color: ${({ theme }) => theme.deprecated_bg2};
+    background-color: ${({ theme }) => theme.hoverDefault};
   }
 
   @media screen and (min-width: ${MEDIA_WIDTHS.deprecated_upToSmall}px) {
@@ -54,7 +52,7 @@ const LinkRow = styled(Link)`
 
   ${({ theme }) => theme.deprecated_mediaWidth.deprecated_upToSmall`
     flex-direction: column;
-    row-gap: 12px;
+
   `};
 `
 
@@ -77,26 +75,16 @@ const RangeLineItem = styled(DataLineItem)`
 
   margin-top: 4px;
   width: 100%;
-
-  ${({ theme }) => theme.deprecated_mediaWidth.deprecated_upToSmall`
-  background-color: ${({ theme }) => theme.deprecated_bg2};
-    border-radius: 12px;
-    padding: 8px 0;
-`};
 `
 
 const DoubleArrow = styled.span`
   margin: 0 2px;
   color: ${({ theme }) => theme.deprecated_text3};
-  ${({ theme }) => theme.deprecated_mediaWidth.deprecated_upToSmall`
-    margin: 4px;
-    padding: 20px;
-  `};
 `
 
 const RangeText = styled.span`
   /* background-color: ${({ theme }) => theme.deprecated_bg2}; */
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem 0.25rem;
   border-radius: 8px;
 `
 

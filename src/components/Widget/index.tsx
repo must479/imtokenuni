@@ -2,11 +2,18 @@ import { Currency, EMPTY_TOKEN_LIST, OnReviewSwapClick, SwapWidget, SwapWidgetSk
 import { useWeb3React } from '@web3-react/core'
 import { useActiveLocale } from 'hooks/useActiveLocale'
 import { useIsDarkMode } from 'state/user/hooks'
+import styled from 'styled-components/macro'
+import { GlowByChain } from 'theme/utils'
 import { DARK_THEME, LIGHT_THEME } from 'theme/widget'
 
 import { useSyncWidgetInputs } from './inputs'
 import { useSyncWidgetSettings } from './settings'
 import { useSyncWidgetTransactions } from './transactions'
+
+const WidgetWrapper = styled.div`
+  border-radius: 16px;
+  ${GlowByChain}
+`
 
 export const WIDGET_WIDTH = 360
 
@@ -27,7 +34,7 @@ export default function Widget({ defaultToken, onReviewSwapClick }: WidgetProps)
   const { transactions } = useSyncWidgetTransactions()
 
   return (
-    <>
+    <WidgetWrapper>
       <SwapWidget
         disableBranding
         hideConnectionUI
@@ -45,7 +52,7 @@ export default function Widget({ defaultToken, onReviewSwapClick }: WidgetProps)
         {...transactions}
       />
       {tokenSelector}
-    </>
+    </WidgetWrapper>
   )
 }
 
