@@ -69,8 +69,8 @@ export function GlowByChain(): any {
       case SupportedChainId.CELO_ALFAJORES:
         setShadow(
           darkMode
-            ? `box-shadow: 0px 20px 120px rgba(186, 228, 210, 0.7);`
-            : `box-shadow: 0px 20px 120px rgba(20, 49, 37, 0.29);`
+            ? `box-shadow: 0px 20px 120px rgba(20, 49, 37, 0.49);`
+            : `box-shadow: 0px 20px 120px rgba(186, 228, 210, 0.7);`
         )
         break
       default:
