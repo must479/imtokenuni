@@ -180,7 +180,7 @@ export const vars = createGlobalTheme(':root', {
     grey100: '#DDE3F7',
     grey50: '#EDEFF7',
     accentTextLightTertiary: 'rgba(255, 255, 255, 0.12)',
-    outline: 'rgba(153, 161, 189, 0.24)',
+    outline: 'rgba(27, 34, 54)',
     lightGrayOverlay: '#99A1BD14',
     accentActiveSoft: '#4c82fb3d',
   },
