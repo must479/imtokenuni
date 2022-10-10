@@ -2,9 +2,13 @@
 import { Currency, CurrencyAmount } from '@uniswap/sdk-core'
 import numbro from 'numbro'
 
-// Convert [CurrencyAmount] to float with no loss of precision / information.
+// Convert [CurrencyAmount] to number with necessary precision for price formatting.
 export const currencyAmountToPreciseFloat = (currencyAmount: CurrencyAmount<Currency>) => {
-  return Number(currencyAmount.numerator) / Number(currencyAmount.denominator)
+  const floatForLargerNumbers = parseFloat(currencyAmount.toFixed(3))
+  if (floatForLargerNumbers < 0.1) {
+    return parseFloat(currencyAmount.toSignificant(3))
+  }
+  return floatForLargerNumbers
 }
 
 // Using a currency library here in case we want to add more in future.
