@@ -45,8 +45,8 @@ export function GlowByChain(): any {
       case SupportedChainId.ARBITRUM_RINKEBY:
         setShadow(
           darkMode
-            ? `box-shadow: 0px 20px 120px rgba(10, 41, 75, 0.7);`
-            : `box-shadow: 0px 20px 120px rgba(205, 232, 251, 0.7);`
+            ? `box-shadow: 0px 20px 120px rgba(10, 41, 75, 0.6);`
+            : `box-shadow: 0px 20px 120px rgba(205, 232, 251, 0.6);`
         )
         break
       case SupportedChainId.OPTIMISM:
@@ -69,15 +69,15 @@ export function GlowByChain(): any {
       case SupportedChainId.CELO_ALFAJORES:
         setShadow(
           darkMode
-            ? `box-shadow: 0px 20px 120px rgba(20, 49, 37, 0.49);`
-            : `box-shadow: 0px 20px 120px rgba(186, 228, 210, 0.7);`
+            ? `box-shadow: 0px 20px 120px rgba(20, 49, 37, 0.39);`
+            : `box-shadow: 0px 20px 120px rgba(186, 228, 210, 0.35);`
         )
         break
       default:
         setShadow(
           darkMode
-            ? `box-shadow: 0px 40px 120px rgba(98, 126, 234, 0.15);`
-            : `box-shadow: 0px 40px 120px rgba(251, 17, 142, 0.15);`
+            ? `box-shadow: 0px 40px 120px rgba(98, 126, 234, 0.10);`
+            : `box-shadow: 0px 40px 120px rgba(251, 17, 142, 0.10);`
         )
         break
     }

@@ -73,6 +73,7 @@ const deprecated_black = ColorsPalette.black
 function uniswapThemeColors(darkMode: boolean): ThemeColors {
   return {
     userThemeColor: darkMode ? colorsDark.userThemeColor : colorsLight.userThemeColor,
+    background: darkMode ? colorsDark.background : colorsLight.background,
 
     backgroundBackdrop: darkMode ? colorsDark.backgroundBackdrop : colorsLight.backgroundBackdrop,
     backgroundSurface: darkMode ? colorsDark.backgroundSurface : colorsLight.backgroundSurface,
@@ -384,7 +385,7 @@ export const ThemedText = {
 export const ThemedGlobalStyle = createGlobalStyle`
 html {
   color: ${({ theme }) => theme.deprecated_text1};
-  background-color: ${({ theme }) => theme.backgroundSurface} !important;
+  background-color: ${({ theme }) => theme.background} !important;
 }
 
 a {

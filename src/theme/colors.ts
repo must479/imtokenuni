@@ -186,6 +186,7 @@ export const colors: GlobalPalette = {
 
 export interface Palette {
   userThemeColor: Color
+  background: string
 
   backgroundBackdrop: Color
   backgroundSurface: Color
@@ -247,6 +248,7 @@ export interface Palette {
 
 export const colorsLight: Palette = {
   userThemeColor: colors.magentaVibrant,
+  background: '#faf9fa', //INTENTIONALLY OFF THEME TO GIVE WHITE BG A SOFTER VISUAL
 
   backgroundBackdrop: colors.white,
   backgroundSurface: colors.white,
@@ -310,6 +312,7 @@ export const colorsLight: Palette = {
 
 export const colorsDark: Palette = {
   userThemeColor: colors.magentaVibrant,
+  background: colors.gray800,
 
   backgroundBackdrop: colors.black,
   backgroundSurface: colors.gray900,

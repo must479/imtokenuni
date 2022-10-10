@@ -11,7 +11,7 @@ export default Card
 
 export const LightCard = styled(Card)`
   border: 1px solid ${({ theme }) => theme.deprecated_bg2};
-  background-color: ${({ theme }) => theme.backgroundModule};
+  background-color: ${({ theme }) => theme.deprecated_bg1};
 `
 
 export const LightGreyCard = styled(Card)`
@@ -27,7 +27,7 @@ export const DarkGreyCard = styled(Card)`
 `
 
 export const DarkCard = styled(Card)`
-  background-color: ${({ theme }) => theme.backgroundModule};
+  background-color: ${({ theme }) => theme.deprecated_bg1};
 `
 
 export const OutlineCard = styled(Card)`

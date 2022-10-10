@@ -11,12 +11,14 @@ const initialStyles = {
   height: '200vh',
   transform: 'translate(-50vw, -100vh)',
   backgroundBlendMode: '',
+  zIndex: '-1 !important',
 }
 const backgroundResetStyles = {
   width: '100vw',
   height: '100vh',
   transform: 'unset',
   backgroundBlendMode: '',
+  zIndex: '-1 !important',
 }
 
 type TargetBackgroundStyles = typeof initialStyles | typeof backgroundResetStyles
