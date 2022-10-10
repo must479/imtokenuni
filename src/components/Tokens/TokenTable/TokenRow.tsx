@@ -59,7 +59,7 @@ const StyledTokenRow = styled.div<{
   max-width: ${MAX_WIDTH_MEDIA_BREAKPOINT};
   min-width: 390px;
   ${({ first, last }) => css`
-    // height: ${first || last ? 'px' : '64px'};
+    height: ${first || last ? '64px' : '64px'};
     padding-top: ${first ? '4px' : '0px'};
     padding-bottom: ${last ? '8px' : '0px'};
   `}

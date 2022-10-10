@@ -159,8 +159,8 @@ export default function TokenDetails() {
             <StatsSection
               TVL={tokenQueryData.market?.totalValueLocked?.value}
               volume24H={tokenQueryData.market?.volume24H?.value}
-              // priceHigh52W={tokenQueryData.market?.priceHigh52W?.value}
-              // priceLow52W={tokenQueryData.market?.priceLow52W?.value}
+              priceHigh52W={tokenQueryData.market?.priceHigh52W?.value}
+              priceLow52W={tokenQueryData.market?.priceLow52W?.value}
             />
             <Hr />
             <AboutSection

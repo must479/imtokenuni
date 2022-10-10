@@ -350,7 +350,7 @@ export const ThemedText = {
     return <TextWrapper fontWeight={500} fontSize={20} color={'textPrimary'} {...props} />
   },
   DeprecatedSubHeader(props: TextProps) {
-    return <TextWrapper fontWeight={400} fontSize={14} {...props} />
+    return <TextWrapper fontWeight={500} fontSize={14} {...props} />
   },
   SubHeader(props: TextProps) {
     return <TextWrapper fontWeight={600} fontSize={16} color={'textPrimary'} {...props} />
