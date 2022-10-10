@@ -316,10 +316,6 @@ const SparkLineLoadingBubble = styled(LongLoadingBubble)`
   height: 4px;
 `
 
-const StyledPercentChange = styled.div<{ delta?: any }>`
-  color: ${({ delta, theme }) => (Math.sign(delta) < 0 ? theme.accentFailure : theme.accentSuccess)};
-`
-
 export const L2NetworkLogo = styled.div<{ networkUrl?: string; size?: string }>`
   height: ${({ size }) => size ?? '12px'};
   width: ${({ size }) => size ?? '12px'};
@@ -547,8 +543,8 @@ export const LoadedRow = forwardRef((props: LoadedRowProps, ref: ForwardedRef<HT
           }
           percentChange={
             <ClickableContent>
+              {formattedDelta}
               {arrow}
-              <StyledPercentChange delta={delta}>{formattedDelta}</StyledPercentChange>
             </ClickableContent>
           }
           marketCap={
