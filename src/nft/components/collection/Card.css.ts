@@ -12,6 +12,7 @@ export const card = style([
     WebkitBoxSizing: 'border-box',
     boxShadow: vars.color.cardDropShadow,
     backgroundColor: themeVars.colors.backgroundSurface,
+    height: 'fit-content',
     ':after': {
       content: '',
       position: 'absolute',
@@ -24,8 +25,18 @@ export const card = style([
       borderColor: '#5D678524',
       pointerEvents: 'none',
     },
-    ':hover': {
-      backgroundColor: themeVars.colors.backgroundInteractive,
+    // ':hover': {
+    //   backgroundColor: themeVars.colors.backgroundInteractive,
+    // },
+  },
+])
+
+export const hoverCard = style([
+  card,
+  {
+    ':after': {
+      borderColor: '#5D678550',
+      pointerEvents: 'none',
     },
   },
 ])

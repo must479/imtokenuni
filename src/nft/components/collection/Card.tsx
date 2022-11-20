@@ -5,6 +5,7 @@ import { MouseoverTooltip } from 'components/Tooltip'
 import { Box } from 'nft/components/Box'
 import { Row } from 'nft/components/Flex'
 import {
+  BagCloseIcon,
   MinusIconLarge,
   PauseButtonIcon,
   PlayButtonIcon,
@@ -174,32 +175,32 @@ const StyledImageContainer = styled.div<{ isDisabled?: boolean }>`
 const StyledBagContainer = styled.div<{ hovered?: boolean }>`
   width: 100%;
   position: absolute;
-  bottom: 0px;
-  justify-content: center;
+  top: 0px;
+  justify-content: flex-end;
   align-items: center;
-  padding-bottom: 1rem;
-  z-index: 99;
+  padding: 1rem;
+  // z-index: 1;
   display: ${({ hovered }) => (hovered ? 'flex' : 'none')};
 `
 
 const StyledBagAffordance = styled(Box)<{ hovered?: boolean }>`
   padding: 8px;
-  border-radius: 24px;
-  // background-color: ${({ theme, hovered }) => (hovered ? theme.backgroundFloating : theme.accentAction)};
-  background-color: ${({ theme }) => theme.backgroundFloating};
-
-  border: 1px solid #ffffff40;
-
-  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  background-color: rgba(159, 159, 159, 0.4);
+  border: 1px solid #ffffff30;
+  backdrop-filter: blur(6px);
   -webkit-transform: translateZ(0);
   -webkit-backface-visibility: hidden;
   -webkit-perspective: 1000;
+  color: white;
   font-size: 14px;
-  color: ${({ theme }) => theme.accentTextLightPrimary};
   transition: transform 100ms ease;
   &:hover {
+    mix-blend-mode: unset;
+
     background: ${({ theme }) => theme.accentAction};
-    transform: scale(1.1);
+    transform: scale(1.05);
+    color: ${({ theme }) => theme.accentTextLightPrimary};
   }
 `
 
@@ -261,7 +262,7 @@ const Container = ({
             position="relative"
             ref={assetRef}
             borderRadius={BORDER_RADIUS}
-            className={selected ? styles.selectedCard : styles.card}
+            className={clsx(selected ? styles.selectedCard : styles.card, hovered && styles.hoverCard)}
             draggable={false}
             transition="250"
           >
@@ -304,14 +305,11 @@ const ImageContainer = ({
   return (
     <StyledImageContainer isDisabled={isDisabled}>
       {children}
-      <StyledBagContainer
-        hovered={hovered || itemsInBag?.length > 0}
-        onClick={isDisabled ? () => null : onClick ?? handleAssetInBag}
-      >
-        <StyledBagAffordance hovered={itemsInBag?.length > 0}>
+      <StyledBagContainer hovered={hovered || selected} onClick={isDisabled ? () => null : onClick ?? handleAssetInBag}>
+        <StyledBagAffordance>
           {selected ? (
             <Box display="flex" alignItems="center" gap="4" justifyContent="center" height="16">
-              Remove
+              <BagCloseIcon width="16" height="16" /> Remove
             </Box>
           ) : (
             <Box display="flex" alignItems="center" justifyContent="center" height="20">
@@ -320,7 +318,9 @@ const ImageContainer = ({
                   <TagIcon width="16" height="16" /> List
                 </Box>
               ) : (
-                <PlusIcon width="24" height="24" />
+                <Box display="flex" alignItems="center" gap="0" justifyContent="center">
+                  <PlusIcon width="24" height="24" />
+                </Box>
               )}
             </Box>
           )}
@@ -352,7 +352,7 @@ const Image = () => {
           transition: 'transform 0.25s ease 0s',
         }}
         src={asset.imageUrl || asset.smallImageUrl}
-        objectFit="contain"
+        objectFit="cover"
         draggable={false}
         onError={() => setNoContent(true)}
         onLoad={(e) => {
