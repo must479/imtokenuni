@@ -5,6 +5,7 @@ import { useBag } from 'nft/hooks'
 import { GenieAsset, Markets, TokenType } from 'nft/types'
 import { formatWeiToDecimal, rarityProviderLogo } from 'nft/utils'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import styled from 'styled-components/macro'
 
 import { useAssetMediaType, useNotForSale } from './Card'
 import { AssetMediaType } from './Card'
@@ -18,7 +19,18 @@ interface CollectionAssetProps {
   rarityVerified?: boolean
 }
 
-const TOOLTIP_TIMEOUT = 1500
+const TOOLTIP_TIMEOUT = 2000
+
+const StyledContainer = styled.div`
+  position: absolute;
+  bottom: 12px;
+  left: 0px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  z-index: 2;
+  pointer-events: none;
+`
 
 export const CollectionAsset = ({
   asset,
@@ -104,15 +116,12 @@ export const CollectionAsset = ({
       addAssetToBag={handleAddAssetToBag}
       removeAssetFromBag={handleRemoveAssetFromBag}
     >
-      <Card.ImageContainer selected={isSelected} showTooltip={showTooltip}>
-        {asset.rarity && provider && (
-          <Card.Ranking
-            rarity={asset.rarity}
-            provider={provider}
-            rarityVerified={!!rarityVerified}
-            rarityLogo={rarityLogo}
-          />
-        )}
+      <Card.ImageContainer
+        selected={isSelected}
+        addAssetToBag={handleAddAssetToBag}
+        removeAssetFromBag={handleRemoveAssetFromBag}
+        itemsInBag={itemsInBag}
+      >
         {assetMediaType === AssetMediaType.Image ? (
           <Card.Image />
         ) : assetMediaType === AssetMediaType.Video ? (
@@ -128,7 +137,14 @@ export const CollectionAsset = ({
               <Card.PrimaryInfo>{asset.name ? asset.name : `#${asset.tokenId}`}</Card.PrimaryInfo>
               {asset.susFlag && <Card.Suspicious />}
             </Card.PrimaryDetails>
-            <Card.DetailsLink />
+            {asset.rarity && provider && (
+              <Card.Ranking
+                rarity={asset.rarity}
+                provider={provider}
+                rarityVerified={!!rarityVerified}
+                rarityLogo={rarityLogo}
+              />
+            )}
           </Card.PrimaryRow>
           <Card.SecondaryRow>
             <Card.SecondaryDetails>

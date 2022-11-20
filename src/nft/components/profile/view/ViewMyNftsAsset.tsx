@@ -1,6 +1,4 @@
 import { Trans } from '@lingui/macro'
-import { MouseoverTooltip } from 'components/Tooltip'
-import Tooltip from 'components/Tooltip'
 import { Box } from 'nft/components/Box'
 import * as Card from 'nft/components/collection/Card'
 import { AssetMediaType } from 'nft/components/collection/Card'
@@ -66,7 +64,11 @@ export const ViewMyNftsAsset = ({
   const [showTooltip, setShowTooltip] = useState(false)
   const isSelectedRef = useRef(isSelected)
 
-  const onCardClick = () => handleSelect(isSelected)
+  const onCardClick = (e: any) => {
+    e.preventDefault()
+    e.stopPropagation()
+    handleSelect(isSelected)
+  }
 
   const handleSelect = (removeAsset: boolean) => {
     removeAsset ? removeSellAsset(asset) : selectSellAsset(asset)
@@ -105,35 +107,18 @@ export const ViewMyNftsAsset = ({
       selected={isSelected}
       addAssetToBag={() => handleSelect(false)}
       removeAssetFromBag={() => handleSelect(true)}
-      onClick={onCardClick}
       isDisabled={isDisabled}
     >
-      <Card.ImageContainer isDisabled={isDisabled}>
-        <Tooltip
-          text={
-            <Box as="span" className={bodySmall} color="textPrimary">
-              {isSelected ? <Trans>Added to bag</Trans> : <Trans>Removed from bag</Trans>}
-            </Box>
-          }
-          show={showTooltip}
-          style={{ display: 'block' }}
-          offsetX={0}
-          offsetY={-68}
-          hideArrow={true}
-          placement="bottom"
-        >
-          <MouseoverTooltip
-            text={getUnsupportedNftTextComponent(asset)}
-            placement="bottom"
-            offsetX={0}
-            offsetY={-100}
-            style={{ display: 'block' }}
-            disableHover={!isDisabled}
-            timeout={isMobile ? TOOLTIP_TIMEOUT : undefined}
-          >
-            {getNftDisplayComponent(assetMediaType, mediaShouldBePlaying, setCurrentTokenPlayingMedia)}
-          </MouseoverTooltip>
-        </Tooltip>
+      <Card.ImageContainer
+        itemsInBag={sellAssets}
+        isDisabled={isDisabled}
+        selected={isSelected}
+        isSell={true}
+        addAssetToBag={() => handleSelect(false)}
+        removeAssetFromBag={() => handleSelect(true)}
+        onClick={(e: void) => onCardClick(e)}
+      >
+        {getNftDisplayComponent(assetMediaType, mediaShouldBePlaying, setCurrentTokenPlayingMedia)}
       </Card.ImageContainer>
       <Card.DetailsContainer>
         <Card.ProfileNftDetails asset={asset} hideDetails={hideDetails} />

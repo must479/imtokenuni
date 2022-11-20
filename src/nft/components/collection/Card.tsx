@@ -5,15 +5,14 @@ import { MouseoverTooltip } from 'components/Tooltip'
 import { Box } from 'nft/components/Box'
 import { Row } from 'nft/components/Flex'
 import {
-  BagCloseIcon,
-  BagIcon,
-  ChevronRightIcon,
   MinusIconLarge,
   PauseButtonIcon,
   PlayButtonIcon,
+  PlusIcon,
   PlusIconLarge,
   PoolIcon,
   RarityVerifiedIcon,
+  TagIcon,
   VerifiedIcon,
 } from 'nft/components/icons'
 import { body, bodySmall, buttonTextMedium, subhead } from 'nft/css/common.css'
@@ -101,7 +100,11 @@ const DetailsLinkContainer = styled.a`
   text-decoration: none;
   font-size: 14px;
   font-weight: 500;
-  color: ${({ theme }) => theme.textTertiary};
+  border: 1px solid;
+  color: ${({ theme }) => theme.accentAction};
+  border-color: ${({ theme }) => theme.accentActionSoft};
+  padding: 2px 6px;
+  border-radius: 6px;
   ${OpacityHoverState};
 `
 
@@ -150,13 +153,16 @@ const Erc1155ControlsInput = styled.div`
 `
 
 const RankingContainer = styled.div`
-  position: absolute;
-  top: 12px;
-  left: 12px;
   z-index: 2;
 `
 
-const StyledImageContainer = styled.a<{ isDisabled?: boolean }>`
+const StyledCardLink = styled.a`
+  text-decoration: none;
+  color: ${({ theme }) => theme.textPrimary};
+  font-size: 14px;
+`
+
+const StyledImageContainer = styled.div<{ isDisabled?: boolean }>`
   position: relative;
   pointer-events: auto;
   &:hover {
@@ -165,45 +171,36 @@ const StyledImageContainer = styled.a<{ isDisabled?: boolean }>`
   cursor: ${({ isDisabled }) => (isDisabled ? 'default' : 'pointer')};
 `
 
-const StyledHoverContainer = styled.div`
-  position: absolute;
+const StyledBagContainer = styled.div<{ hovered?: boolean }>`
   width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  padding-bottom: 1rem;
-  color: ${({ theme }) => theme.accentTextLightPrimary};
-  z-index: 1;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 40%);
-  font-size: 14px;
-  font-weight: 600px;
-`
-const StyledToolTipContainer = styled(StyledHoverContainer)`
-  background: none;
-`
-
-const StyledAddAffordance = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  font-size: 14px;
-  font-weight: 600px;
-  width: fit-content;
-  gap: 8px;
-`
-
-const StyledToopTipAffordance = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  font-size: 14px;
-  font-weight: 600px;
   position: absolute;
-  bottom: 0.5rem;
-  background-color: ${({ theme }) => theme.backgroundSurface};
-  padding: 8px 12px;
-  border-radius: 8px;
+  bottom: 0px;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 1rem;
+  z-index: 99;
+  display: ${({ hovered }) => (hovered ? 'flex' : 'none')};
+`
+
+const StyledBagAffordance = styled(Box)<{ hovered?: boolean }>`
+  padding: 8px;
+  border-radius: 24px;
+  // background-color: ${({ theme, hovered }) => (hovered ? theme.backgroundFloating : theme.accentAction)};
+  background-color: ${({ theme }) => theme.backgroundFloating};
+
+  border: 1px solid #ffffff40;
+
+  backdrop-filter: blur(10px);
+  -webkit-transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  font-size: 14px;
+  color: ${({ theme }) => theme.accentTextLightPrimary};
+  transition: transform 100ms ease;
+  &:hover {
+    background: ${({ theme }) => theme.accentAction};
+    transform: scale(1.1);
+  }
 `
 
 /* -------- ASSET CARD -------- */
@@ -249,6 +246,54 @@ const Container = ({
     if (hovered && assetRef.current?.matches(':hover') === false) toggleHovered()
   }, [hovered])
 
+  const toggleHover = useCallback(() => toggleHovered(), [])
+
+  return (
+    <CardContext.Provider value={providerValue}>
+      <Box onMouseEnter={toggleHover} onMouseLeave={toggleHover} position="relative">
+        <StyledCardLink
+          href={baseHref(asset)}
+          onClick={(e: MouseEvent) => {
+            e.stopPropagation()
+          }}
+        >
+          <Box
+            position="relative"
+            ref={assetRef}
+            borderRadius={BORDER_RADIUS}
+            className={selected ? styles.selectedCard : styles.card}
+            draggable={false}
+            transition="250"
+          >
+            {children}
+          </Box>
+        </StyledCardLink>
+      </Box>
+    </CardContext.Provider>
+  )
+}
+
+const ImageContainer = ({
+  selected,
+  children,
+  isDisabled = false,
+  addAssetToBag,
+  removeAssetFromBag,
+  onClick,
+  itemsInBag,
+  isSell = false,
+}: {
+  children: ReactNode
+  isDisabled?: boolean
+  selected: boolean
+  itemsInBag?: any
+  isSell?: any
+  addAssetToBag: () => void
+  removeAssetFromBag: () => void
+  onClick?: () => void
+}) => {
+  const { hovered, asset } = useCardContext()
+
   const handleAssetInBag = (e: MouseEvent) => {
     if (!asset.notForSale) {
       e.preventDefault()
@@ -256,80 +301,31 @@ const Container = ({
     }
   }
 
-  const toggleHover = useCallback(() => toggleHovered(), [])
-
   return (
-    <CardContext.Provider value={providerValue}>
-      <Box
-        position="relative"
-        ref={assetRef}
-        borderRadius={BORDER_RADIUS}
-        className={selected ? styles.selectedCard : styles.card}
-        draggable={false}
-        onMouseEnter={toggleHover}
-        onMouseLeave={toggleHover}
-        transition="250"
+    <StyledImageContainer isDisabled={isDisabled}>
+      {children}
+      <StyledBagContainer
+        hovered={hovered || itemsInBag?.length > 0}
         onClick={isDisabled ? () => null : onClick ?? handleAssetInBag}
       >
-        {children}
-      </Box>
-    </CardContext.Provider>
-  )
-}
-
-const ImageContainer = ({
-  children,
-  showTooltip = false,
-  selected = false,
-  isDisabled = false,
-}: {
-  children: ReactNode
-  selected?: boolean
-  showTooltip?: boolean
-  isDisabled?: boolean
-}) => {
-  // const { asset } = useCardContext()
-  const imageRef = useRef<HTMLAnchorElement>(null)
-
-  const [hovered, toggleHovered] = useReducer((s) => !s, false)
-
-  useLayoutEffect(() => {
-    if (hovered && imageRef.current?.matches(':hover') === false) {
-      toggleHovered()
-    }
-  }, [hovered])
-
-  const toggleHover = useCallback(() => toggleHovered(), [])
-
-  return (
-    <StyledImageContainer ref={imageRef} isDisabled={isDisabled} onMouseEnter={toggleHover} onMouseLeave={toggleHover}>
-      {hovered && (
-        <StyledHoverContainer>
-          {showTooltip && (
-            <StyledToopTipAffordance>{!selected ? <>Removed from bag</> : <>Added to bag</>}</StyledToopTipAffordance>
-          )}
-          {!showTooltip && (
-            <StyledAddAffordance>
-              {!selected ? (
-                <>
-                  <BagIcon width={16} height={16} /> Add to bag
-                </>
+        <StyledBagAffordance hovered={itemsInBag?.length > 0}>
+          {selected ? (
+            <Box display="flex" alignItems="center" gap="4" justifyContent="center" height="16">
+              Remove
+            </Box>
+          ) : (
+            <Box display="flex" alignItems="center" justifyContent="center" height="20">
+              {isSell ? (
+                <Box display="flex" alignItems="center" gap="8" justifyContent="center" paddingRight="4">
+                  <TagIcon width="16" height="16" /> List
+                </Box>
               ) : (
-                <>
-                  <BagCloseIcon width={16} height={16} /> Remove
-                </>
+                <PlusIcon width="24" height="24" />
               )}
-            </StyledAddAffordance>
+            </Box>
           )}
-        </StyledHoverContainer>
-      )}
-
-      {!hovered && showTooltip && (
-        <StyledToolTipContainer>
-          <StyledToopTipAffordance>{!selected ? <>Removed from bag</> : <>Added to bag</>}</StyledToopTipAffordance>
-        </StyledToolTipContainer>
-      )}
-      {children}
+        </StyledBagAffordance>
+      </StyledBagContainer>
     </StyledImageContainer>
   )
 }
@@ -558,38 +554,11 @@ interface CardDetailsContainerProps {
   children: ReactNode
 }
 
-const StyledDetailsLink = styled.a`
-  text-decoration: none;
-  color: ${({ theme }) => theme.textPrimary};
-`
-
-const StyledDetailsContainer = styled(Row)`
-  &:hover {
-    background-color: ${({ theme }) => theme.backgroundInteractive};
-    cursor: pointer;
-  }
-`
-
 const DetailsContainer = ({ children }: CardDetailsContainerProps) => {
-  const { asset } = useCardContext()
-
   return (
-    <StyledDetailsLink
-      href={baseHref(asset)}
-      onClick={(e: MouseEvent) => {
-        e.stopPropagation()
-      }}
-    >
-      <StyledDetailsContainer
-        position="relative"
-        padding="12"
-        justifyContent="space-between"
-        flexDirection="column"
-        transition="250"
-      >
-        {children}
-      </StyledDetailsContainer>
-    </StyledDetailsLink>
+    <Row position="relative" padding="12" justifyContent="space-between" flexDirection="column" transition="250">
+      {children}
+    </Row>
   )
 }
 
@@ -632,7 +601,6 @@ const ProfileNftDetails = ({ asset, hideDetails }: ProfileNftDetailsProps) => {
           </TruncatedTextRow>
           {asset.collectionIsVerified && <VerifiedIcon height="16px" width="16px" fill={colors.magentaVibrant} />}
         </PrimaryDetails>
-        {!hideDetails && <DetailsLink />}
       </PrimaryRow>
       <Row justifyItems="flex-start">
         <TruncatedTextRow
@@ -756,15 +724,8 @@ const DetailsLink = () => {
   const { asset } = useCardContext()
 
   return (
-    <DetailsLinkContainer
-      href={baseHref(asset)}
-      onClick={(e: MouseEvent) => {
-        e.stopPropagation()
-      }}
-    >
-      <Box>
-        Details <ChevronRightIcon width={10} height={10} />
-      </Box>
+    <DetailsLinkContainer>
+      <Box>Details</Box>
     </DetailsLinkContainer>
   )
 }
