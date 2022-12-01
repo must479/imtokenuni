@@ -1,5 +1,5 @@
 import { TraceEvent } from '@uniswap/analytics'
-import { BrowserEvent, ElementName, EventName } from '@uniswap/analytics-events'
+import { BrowserEvent, InterfaceElementName, SharedEventName } from '@uniswap/analytics-events'
 import { BookOpen, Globe, Heart, Twitter } from 'react-feather'
 import styled from 'styled-components/macro'
 import { BREAKPOINTS } from 'theme'
@@ -62,22 +62,38 @@ export const AboutFooter = () => {
   return (
     <Footer>
       <FooterLinks>
-        <TraceEvent events={[BrowserEvent.onClick]} name={EventName.ELEMENT_CLICKED} element={ElementName.SUPPORT_LINK}>
+        <TraceEvent
+          events={[BrowserEvent.onClick]}
+          name={SharedEventName.ELEMENT_CLICKED}
+          element={InterfaceElementName.SUPPORT_LINK}
+        >
           <FooterLink rel="noopener noreferrer" target="_blank" href="https://support.uniswap.org">
             <Globe /> Support
           </FooterLink>
         </TraceEvent>
-        <TraceEvent events={[BrowserEvent.onClick]} name={EventName.ELEMENT_CLICKED} element={ElementName.TWITTER_LINK}>
+        <TraceEvent
+          events={[BrowserEvent.onClick]}
+          name={SharedEventName.ELEMENT_CLICKED}
+          element={InterfaceElementName.TWITTER_LINK}
+        >
           <FooterLink rel="noopener noreferrer" target="_blank" href="https://twitter.com/uniswap">
             <Twitter /> Twitter
           </FooterLink>
         </TraceEvent>
-        <TraceEvent events={[BrowserEvent.onClick]} name={EventName.ELEMENT_CLICKED} element={ElementName.BLOG_LINK}>
+        <TraceEvent
+          events={[BrowserEvent.onClick]}
+          name={SharedEventName.ELEMENT_CLICKED}
+          element={InterfaceElementName.BLOG_LINK}
+        >
           <FooterLink rel="noopener noreferrer" target="_blank" href="https://uniswap.org/blog">
             <BookOpen /> Blog
           </FooterLink>
         </TraceEvent>
-        <TraceEvent events={[BrowserEvent.onClick]} name={EventName.ELEMENT_CLICKED} element={ElementName.CAREERS_LINK}>
+        <TraceEvent
+          events={[BrowserEvent.onClick]}
+          name={SharedEventName.ELEMENT_CLICKED}
+          element={InterfaceElementName.CAREERS_LINK}
+        >
           <FooterLink rel="noopener noreferrer" target="_blank" href="https://boards.greenhouse.io/uniswaplabs">
             <Heart /> Careers
           </FooterLink>
