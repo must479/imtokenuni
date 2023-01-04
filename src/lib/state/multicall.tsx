@@ -9,7 +9,7 @@ const multicall = createMulticall()
 
 export default multicall
 
-function getBlocksPerFetchForChainId(chainId: number | undefined): number {
+export function getBlocksPerFetchForChainId(chainId: number | undefined): number {
   switch (chainId) {
     case SupportedChainId.ARBITRUM_ONE:
     case SupportedChainId.OPTIMISM:
