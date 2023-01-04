@@ -442,6 +442,15 @@ export const CollectionNfts = ({ contractAddress, collectionStats, rarityVerifie
   }, [collectionStats?.marketplaceCount, setMarketCount])
 
   const location = useLocation()
+
+  const updateUrlFilters = () => {
+    useCollectionFilters.subscribe((state) => {
+      if (JSON.stringify(oldStateRef.current) !== JSON.stringify(state)) {
+        syncLocalFiltersWithURL(state)
+        oldStateRef.current = state
+      }
+    })
+  }
   // Applying filters from URL to local state
   useEffect(() => {
     if (collectionStats?.traits) {
@@ -450,13 +459,7 @@ export const CollectionNfts = ({ contractAddress, collectionStats, rarityVerifie
       requestAnimationFrame(() => {
         useCollectionFilters.setState(modifiedQuery as any)
       })
-
-      useCollectionFilters.subscribe((state) => {
-        if (JSON.stringify(oldStateRef.current) !== JSON.stringify(state)) {
-          syncLocalFiltersWithURL(state)
-          oldStateRef.current = state
-        }
-      })
+      updateUrlFilters()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location])
@@ -493,6 +496,7 @@ export const CollectionNfts = ({ contractAddress, collectionStats, rarityVerifie
   const handleClearAllClick = useCallback(() => {
     reset()
     setPrevMinMax([0, 100])
+    updateUrlFilters()
     scrollToTop()
   }, [reset, setPrevMinMax])
 
@@ -568,6 +572,7 @@ export const CollectionNfts = ({ contractAddress, collectionStats, rarityVerifie
                 onClick={() => {
                   scrollToTop()
                   removeMarket(market)
+                  updateUrlFilters()
                 }}
               />
             ))}
@@ -582,6 +587,7 @@ export const CollectionNfts = ({ contractAddress, collectionStats, rarityVerifie
                 onClick={() => {
                   scrollToTop()
                   removeTrait(trait)
+                  updateUrlFilters()
                 }}
               />
             ))}
@@ -593,6 +599,7 @@ export const CollectionNfts = ({ contractAddress, collectionStats, rarityVerifie
                   setMin('')
                   setMax('')
                   setPrevMinMax([0, 100])
+                  updateUrlFilters()
                 }}
               />
             )}
