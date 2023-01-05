@@ -5196,10 +5196,10 @@
     "@uniswap/v3-core" "1.0.0"
     "@uniswap/v3-periphery" "^1.0.1"
 
-"@uniswap/widgets@2.22.11":
-  version "2.22.11"
-  resolved "https://registry.yarnpkg.com/@uniswap/widgets/-/widgets-2.22.11.tgz#d64179e58d3923af1b80f63bd8fb44804fc047bd"
-  integrity sha512-eBG7L/inLLHY2+cLKFsqqCK8rhoIzHWsUDm0glpLUyqs6NiZssoKHgIPWzjT2cNwupCYol08ruKM+JR1wBVdTQ==
+"@uniswap/widgets@2.24.0":
+  version "2.24.0"
+  resolved "https://registry.yarnpkg.com/@uniswap/widgets/-/widgets-2.24.0.tgz#bb4d68ce29fc6e2ed2444a64d7b7e3f704ae4a39"
+  integrity sha512-6pUiFxdLyviZPdzxXQMEogWPDgmlSgkH2Ter2Wq1ndqireD632lwLMymYgYTuoDgfr+LvdHHZmYdBc5JVFj5xg==
   dependencies:
     "@babel/runtime" ">=7.17.0"
     "@fontsource/ibm-plex-mono" "^4.5.1"
@@ -12996,12 +12996,7 @@ jest@26.6.0:
     import-local "^3.0.2"
     jest-cli "^26.6.0"
 
-jotai@^1.3.7:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/jotai/-/jotai-1.4.0.tgz#0f350f65a968dd3ee2f9ad3618a3af635cd10220"
-  integrity sha512-CUB+A3N+WjtimZvtDnMXvVRognzKh86KB3rKnQlbRvpnmGYU+O9aOZMWSgTaxstXc4Y5GYy02LBEjiv4Rs8MAg==
-
-jotai@^1.9.2:
+jotai@^1.3.7, jotai@^1.9.2:
   version "1.11.0"
   resolved "https://registry.yarnpkg.com/jotai/-/jotai-1.11.0.tgz#d2a666f16935797743eb41a3b75583ea4e17fefb"
   integrity sha512-8OzJmRxcTZoAOJSz6uTnmofmjAOgNOdAOy26rvyw3OBxt6XIoklNnfUTCm8wgp84SSLJbPZA01VS5O/SUz+QYg==
