@@ -5196,16 +5196,17 @@
     "@uniswap/v3-core" "1.0.0"
     "@uniswap/v3-periphery" "^1.0.1"
 
-"@uniswap/widgets@2.22.11":
-  version "2.22.11"
-  resolved "https://registry.yarnpkg.com/@uniswap/widgets/-/widgets-2.22.11.tgz#d64179e58d3923af1b80f63bd8fb44804fc047bd"
-  integrity sha512-eBG7L/inLLHY2+cLKFsqqCK8rhoIzHWsUDm0glpLUyqs6NiZssoKHgIPWzjT2cNwupCYol08ruKM+JR1wBVdTQ==
+"@uniswap/widgets@2.25.1":
+  version "2.25.1"
+  resolved "https://registry.yarnpkg.com/@uniswap/widgets/-/widgets-2.25.1.tgz#53d03da44587c0851d2f39516d7f9037d0c65b9d"
+  integrity sha512-Jth8qd7g58W1SVRpSFNiTKjs0HmcOacpxdSKfRSOIJOcYq8vgjZ0k4W3i/bzjf8PDRtLGh4Nn09VLugtIMUVIw==
   dependencies:
     "@babel/runtime" ">=7.17.0"
     "@fontsource/ibm-plex-mono" "^4.5.1"
     "@fontsource/inter" "^4.5.1"
     "@popperjs/core" "^2.4.4"
     "@reduxjs/toolkit" "^1.6.1"
+    "@uniswap/conedison" "^1.1.1"
     "@uniswap/permit2-sdk" "^1.2.0"
     "@uniswap/redux-multicall" "^1.1.8"
     "@uniswap/router-sdk" "^1.3.0"
@@ -5247,6 +5248,7 @@
     react-window "^1.8.5"
     rebass "^4.0.7"
     redux ">=4.1.2"
+    resize-observer-polyfill "^1.5.1"
     setimmediate "^1.0.5"
     styled-components ">=5"
     tiny-invariant "^1.2.0"
@@ -12996,12 +12998,7 @@ jest@26.6.0:
     import-local "^3.0.2"
     jest-cli "^26.6.0"
 
-jotai@^1.3.7:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/jotai/-/jotai-1.4.0.tgz#0f350f65a968dd3ee2f9ad3618a3af635cd10220"
-  integrity sha512-CUB+A3N+WjtimZvtDnMXvVRognzKh86KB3rKnQlbRvpnmGYU+O9aOZMWSgTaxstXc4Y5GYy02LBEjiv4Rs8MAg==
-
-jotai@^1.9.2:
+jotai@^1.3.7, jotai@^1.9.2:
   version "1.11.0"
   resolved "https://registry.yarnpkg.com/jotai/-/jotai-1.11.0.tgz#d2a666f16935797743eb41a3b75583ea4e17fefb"
   integrity sha512-8OzJmRxcTZoAOJSz6uTnmofmjAOgNOdAOy26rvyw3OBxt6XIoklNnfUTCm8wgp84SSLJbPZA01VS5O/SUz+QYg==
@@ -16927,6 +16924,11 @@ reselect@^4.1.5:
   version "4.1.5"
   resolved "https://registry.yarnpkg.com/reselect/-/reselect-4.1.5.tgz#852c361247198da6756d07d9296c2b51eddb79f6"
   integrity sha512-uVdlz8J7OO+ASpBYoz1Zypgx0KasCY20H+N8JD13oUMtPvSHQuscrHop4KbXrbsBcdB9Ds7lVK7eRkBIfO43vQ==
+
+resize-observer-polyfill@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/resize-observer-polyfill/-/resize-observer-polyfill-1.5.1.tgz#0e9020dd3d21024458d4ebd27e23e40269810464"
+  integrity sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==
 
 resolve-cwd@^2.0.0:
   version "2.0.0"
